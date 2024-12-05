@@ -20,13 +20,9 @@ for i in range(len(data)):
     if safetyTest(data[i]):
         safe_count += 1
 
-print("Safe: ", safe_count)
-
-# Part 2
+print("Part 1", safe_count)
 
 safe_count = 0
-
-class Safe(Exception): pass
 
 for i in range(len(data)):
     for j in range(len(data[i])):
@@ -34,4 +30,4 @@ for i in range(len(data)):
             safe_count +=1
             break
 
-print("Safe (with damper): ", safe_count)
+print("Part 2", safe_count)
