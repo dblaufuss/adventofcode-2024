@@ -2,7 +2,7 @@ import numpy as np
 
 data = []
 
-with open("C:\\Users\\dblau\\Documents\\GitHub\\adventofcode-2024\\data\\day6.txt", "r") as f:
+with open("data\\day6.txt", "r") as f:
     for line in f.readlines():
         data.append([*line.strip()])
 
