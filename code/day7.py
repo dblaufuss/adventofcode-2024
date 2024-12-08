@@ -1,6 +1,6 @@
 data = []
 
-with open("data\\day7.txt", "r") as f:
+with open("data\\day7_test.txt", "r") as f:
     for line in f.readlines():
         data.append([int(line.split(":")[0]), tuple(int(x) for x in line.split()[1:])])
 
@@ -11,7 +11,7 @@ class TreeNode:
         self.middle = middle
         self.right = right
 
-def createTree(nums: list) -> TreeNode:
+def createTree(nums: list, target: int) -> TreeNode:
     queue = []
     depth = len(nums)-1
 
@@ -28,33 +28,40 @@ def createTree(nums: list) -> TreeNode:
         else:
             for j in range(size):
                 node = queue.pop(0)
-                node.left = TreeNode(node.val*nums[i])
-                node.middle = TreeNode(int(f"{node.val}{nums[i]}"))
-                node.right = TreeNode(node.val+nums[i])
+                if node.val*nums[i] <= target:
+                    node.left = TreeNode(node.val*nums[i])
+                    queue.append(node.left)
 
-                queue.append(node.left)
-                queue.append(node.middle)
-                queue.append(node.right)
+                if int(f"{node.val}{nums[i]}") <= target:
+                    node.middle = TreeNode(int(f"{node.val}{nums[i]}"))
+                    queue.append(node.middle)
+
+                if node.val+nums[i] <= target:
+                    node.right = TreeNode(node.val+nums[i])
+                    queue.append(node.right)
 
     return root
 
-def leafNodes1(root: TreeNode) -> set:
-    nodes = set()
+def leafNodes1(root: TreeNode) -> list:
+    nodes = []
     if not root.left and not root.right:
-        nodes.add(root.val)
-    else:
-        nodes.update(leafNodes1(root.right))
-        nodes.update(leafNodes1(root.left))
+        nodes.append(root.val)
+    if root.left:
+        nodes.extend(leafNodes1(root.left))
+    if root.right:
+        nodes.extend(leafNodes1(root.right))
     return nodes
 
-def leafNodes2(root: TreeNode) -> set:
-    nodes = set()
+def leafNodes2(root: TreeNode) -> list:
+    nodes = []
     if not root.left and not root.right and not root.middle:
-        nodes.add(root.val)
-    else:
-        nodes.update(leafNodes2(root.right))
-        nodes.update(leafNodes2(root.middle))
-        nodes.update(leafNodes2(root.left))
+        nodes.append(root.val)
+    if root.left:
+        nodes.extend(leafNodes2(root.left))
+    if root.middle:
+        nodes.extend(leafNodes2(root.middle))
+    if root.right:
+        nodes.extend(leafNodes2(root.right))
     return nodes
 
 total1 = 0
@@ -62,7 +69,7 @@ total2 = 0
 
 for row in data:
     print(row)
-    tree = createTree(row[1])
+    tree = createTree(row[1], row[0])
     if row[0] in leafNodes1(tree):
         total1 += row[0]
     
