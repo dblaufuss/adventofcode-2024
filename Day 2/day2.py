@@ -1,7 +1,6 @@
-#https://adventofcode.com/2024/day/2
 data = []
 
-with open("data\\day2.txt", "r") as f:
+with open("input.txt", "r") as f:
     for line in f.readlines():
         vals = [int(x) for x in line.split(" ")]
         data.append(vals)

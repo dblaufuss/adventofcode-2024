@@ -1,12 +1,10 @@
-import numpy as np
-
 num_rules = 1176
 num_updates = 203
 
 rules = {}
 updates = []
 
-with open("data\\day5.txt", "r") as f:
+with open("input.txt", "r") as f:
     for rule in f.readlines()[0:num_rules]:
         num1 = int(rule[0:2])
         num2 = int(rule[3:5])
@@ -15,7 +13,7 @@ with open("data\\day5.txt", "r") as f:
         except KeyError:
             rules[num1] = [num2]
 
-with open("data\\day5.txt", "r") as f:
+with open("input.txt", "r") as f:
     for update in f.readlines()[-num_updates:]:
         updates.append(eval("["+update+"]"))
 

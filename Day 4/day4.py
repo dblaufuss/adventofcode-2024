@@ -1,9 +1,7 @@
 import numpy as np
 
-with open("data\\day4.txt", "r") as f:
+with open("input.txt", "r") as f:
     data = np.array([list(line.replace("\n", "")) for line in f.readlines()])
-
-print(data)
 
 XMAS = ["X", "M", "A", "S"]
 SAMX = XMAS[::-1]

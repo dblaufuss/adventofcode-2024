@@ -1,12 +1,12 @@
 import re
 
-with open("data\\day3.txt", "r") as f:
+with open("input.txt", "r") as f:
     data = "".join(f.readlines())
 
 total = 0
 
 for a, b in re.findall(r"mul\((\d+),(\d+)\)", data):
-	total += int(a) * int(b)
+    total += int(a) * int(b)
 
 print("Part 1: ", total)
 

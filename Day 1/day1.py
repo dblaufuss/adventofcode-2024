@@ -1,8 +1,7 @@
-#https://adventofcode.com/2024/day/1
 list1 = []
 list2 = []
 
-with open("data\\day1.txt", "r") as f:
+with open("input.txt", "r") as f:
     for line in f.readlines():
         vals = line.split("   ")
         list1.append(int(vals[0]))
